@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
-import { EditComponent } from './edit/edit.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { UserRoutingModule } from './user-routing.module';
 
 
 
 @NgModule({
-  declarations: [UserComponent, EditComponent],
+  declarations: [UserComponent, UserEditComponent, UserDetailComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    UserRoutingModule
   ]
 })
 export class UserModule { }

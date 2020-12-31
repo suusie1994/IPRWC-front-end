@@ -5,7 +5,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/products', pathMatch: 'full' },
   { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
-  { path: 'users', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
+  { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
   { path: 'orders', loadChildren: () => import('./order/orders.module').then(m => m.OrdersModule) },
   { path: 'cart', loadChildren: () => import('./cart/cart.module').then(m => m.CartModule) },
 ];
