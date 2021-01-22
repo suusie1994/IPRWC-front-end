@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { ApiService } from '../shared/api.service';
+import { Customer } from './customer.model';
 import { User } from './user.model';
 
 @Injectable({
@@ -14,6 +15,7 @@ export class UserService {
     return this._userSubject;
   }
   private loggedInUser: User | null = null;
+  // tslint:disable-next-line: variable-name
   private _userSubject: Subject<User|null> = new Subject<User|null>();
 
 
@@ -42,15 +44,45 @@ export class UserService {
     this.authUser(remember);
   }
 
-  register(user: User): void {
+  register(user: User, customer: Customer): void {
     const headers = this.api.createRequestHeaders();
-    this.http.put<User>('http://localhost:8080/api/users/create', user, { headers }).subscribe(
-      data => {
-        this.router.navigate(['/']); //TODO moet worden customer aanmaken pagina
-      }, error => {
-        alert('Het registreren is mislukt');
+    this.http.put<User>('http://localhost:8080/api/users/create', user, { headers }).toPromise()
+    .then( () => {
+      if (user.username && user.password) {
+        this.authService.setAuthorization(
+          user.username,
+          user.password
+        );
       }
-    );
+      const newheaders = this.api.createRequestHeaders();
+      this.http.get<User>('http://localhost:8080/api/users/me', { headers: newheaders }).toPromise()
+      .then(response => {
+        const respUser: User = {
+          id: response.id,
+          username: response.username,
+          roles: response.roles
+        };
+        this.loggedInUser = respUser;
+        this._userSubject.next(this.loggedInUser);
+        this.authService.storeAuthorization();
+      }).then( () => {
+        this.http.put<Customer>('http://localhost:8080/api/customers/create', {
+          id: this.loggedInUser?.id,
+          firstname: customer.firstname,
+          lastname: customer.lastname,
+          emailAddress: customer.emailAddress,
+          address: customer.address,
+          zipcode: customer.zipcode,
+          city: customer.city,
+          phoneNumber: customer.phoneNumber
+        }, { headers: newheaders })
+        .toPromise().then( resdata => {
+            this.router.navigate(['../user/' + this.loggedInUser?.id]);
+          }, errorcustomer => {
+            alert('Het registreren is mislukt');
+          });
+      });
+    }).catch(error => console.log(error));
   }
 
   authUser(remember?: boolean): void {
@@ -83,6 +115,7 @@ export class UserService {
   }
 
   private returnToPage(): void {
+    // tslint:disable-next-line: no-string-literal
     this.router.navigate([this.route.snapshot.queryParams['returnUrl'] || '/']);
   }
 

@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col-xs-12 col-md-6 col-md-offset-3">
+<div class="row loginsignup">
+  <div class="col-xs-6 col-xs-offset-3 col-md-6 col-md-offset-3">
     <div *ngIf="isLoading" style="text-align: center;">
       <app-loading-spinner></app-loading-spinner>
     </div>
@@ -27,6 +27,91 @@
           required
           minlength="6"
         />
+      </div>
+      <div *ngIf="!isLoginMode">
+        <hr>
+        <div class="form-group">
+          <label for="firstname">Voornaam</label>
+          <input 
+            type="text"
+            id="firstname"
+            class="form-control"
+            ngModel
+            name="firstname"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="lastname">Achternaam</label>
+          <input 
+            type="text"
+            id="lastname"
+            class="form-control"
+            ngModel
+            name="lastname"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="emailAddress">Emailadres</label>
+          <input 
+            type="email"
+            id="emailAddress"
+            class="form-control"
+            ngModel
+            name="emailAddress"
+            required
+            email
+          />
+        </div>
+        <div class="form-group">
+          <label for="address">Adres + huisnummer</label>
+          <input 
+            type="text"
+            id="address"
+            class="form-control"
+            ngModel
+            name="address"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="zipcode">Postcode</label>
+          <input 
+            type="text"
+            id="zipcode"
+            class="form-control"
+            ngModel
+            name="zipcode"
+            required
+            min="6"
+            maxlength="7"
+          />
+        </div>
+        <div class="form-group">
+          <label for="city">Plaatsnaam</label>
+          <input 
+            type="text"
+            id="city"
+            class="form-control"
+            ngModel
+            name="city"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Telefoon nummer</label>
+          <input 
+            type="text"
+            id="phoneNumber"
+            class="form-control"
+            ngModel
+            name="phoneNumber"
+            required
+            minlength="10"
+            maxlength="13"
+          />
+        </div>
       </div>
       <div>
         <button

@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
   { path: 'orders', loadChildren: () => import('./order/orders.module').then(m => m.OrdersModule) },
   { path: 'cart', loadChildren: () => import('./cart/cart.module').then(m => m.CartModule) },
+  { path: '**', redirectTo: '/products'} // TODO 404 page maken
 ];
 
 @NgModule({

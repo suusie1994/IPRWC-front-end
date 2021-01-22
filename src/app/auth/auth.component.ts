@@ -2,17 +2,17 @@ import {
   Component,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Customer } from '../user/customer.model';
 import { UserService } from '../user/user.service';
-import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
-  templateUrl: './auth.component.html'
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.css']
 })
 export class AuthComponent {
-  isLoginMode: boolean = true;
-  isLoading: boolean = false;
+  isLoginMode = true;
+  isLoading = false;
 
   constructor(private userService: UserService){}
 
@@ -26,6 +26,15 @@ export class AuthComponent {
     }
     const username = form.value.username;
     const password = form.value.password;
+    const customer = {
+      firstname: form.value.firstname,
+      lastname: form.value.lastname,
+      emailAddress: form.value.emailAddress,
+      address: form.value.address,
+      zipcode: form.value.zipcode,
+      city: form.value.city,
+      phoneNumber: form.value.phoneNumber
+    };
 
     this.isLoading = true;
 
@@ -35,7 +44,7 @@ export class AuthComponent {
       this.isLoading = false;
     } else {
       // signup
-      this.userService.register({username, password, roles: ['CUSTOMER']});
+      this.userService.register({username, password, roles: ['CUSTOMER']}, customer);
       this.isLoading = false;
     }
 

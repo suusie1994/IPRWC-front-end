@@ -7,7 +7,11 @@ import { UserRoutingModule } from './user-routing.module';
 
 
 @NgModule({
-  declarations: [UserComponent, UserEditComponent, UserDetailComponent],
+  declarations: [
+    UserComponent,
+    UserEditComponent,
+    UserDetailComponent
+  ],
   imports: [
     CommonModule,
     UserRoutingModule
