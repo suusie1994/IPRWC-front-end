@@ -10,12 +10,12 @@
       <ul class="nav navbar-nav">
         <!-- als niet ingelogd -->
         <!-- *ngIf="isAuthenticated" -->
-        <li routerLinkAvtive="active">
+        <li routerLinkAvtive="active" *ngIf="!isAuthenticated">
           <a routerLink="/auth">Login</a>
         </li> 
         <!-- als ingelogd -->
         <!-- *ngIf="isAuthenticated" -->
-        <li routerLinkAvtive="active">
+        <li routerLinkAvtive="active" *ngIf="isAuthenticated">
           <a routerLink="/user">Acount</a>
         </li>
         <!-- Winkelwagen -->
@@ -25,7 +25,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <!-- *ngIf="isAuthenticated" -->
-        <li >
+        <li *ngIf="isAuthenticated">
           <a style="cursor: pointer;" (click)="onLogout()">Logout</a>
         </li>
       </ul>
