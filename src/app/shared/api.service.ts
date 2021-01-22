@@ -1,15 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-    constructor(private http: HttpClient,
-                private authService: AuthService) {}
+    constructor(private authService: AuthService) {}
 
     // private createQueryString(queryParameters: Object): string
     // {

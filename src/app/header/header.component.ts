@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, DoCheck, OnChanges, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { UserService } from '../user/user.service';
 
@@ -7,9 +7,9 @@ import { UserService } from '../user/user.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent implements OnInit, DoCheck {
   collapsed = true;
-  isAuthenticated: boolean = false;
+  isAuthenticated = false;
 
   constructor(private userService: UserService, private authService: AuthService) { }
 
@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.isAuthenticated = this.authService.hasAuthorization();
   }
 
-  ngOnChanges(): void {
+  ngDoCheck(): void {
     this.isAuthenticated = this.authService.hasAuthorization();
   }
 

@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 import { ApiService } from '../shared/api.service';
 import { User } from './user.model';
@@ -11,11 +10,11 @@ import { User } from './user.model';
   providedIn: 'root'
 })
 export class UserService {
-  get userSubject(): Subject<User> {
+  get userSubject(): Subject<User|null> {
     return this._userSubject;
   }
-  private loggedInUser: User = {};
-  private _userSubject: Subject<User> = new Subject<User>();
+  private loggedInUser: User | null = null;
+  private _userSubject: Subject<User|null> = new Subject<User|null>();
 
 
   constructor(private http: HttpClient,
@@ -47,7 +46,7 @@ export class UserService {
     const headers = this.api.createRequestHeaders();
     this.http.put<User>('http://localhost:8080/api/users/create', user, { headers }).subscribe(
       data => {
-        this.returnToPage(); //TODO moet worden customer aanmaken pagina
+        this.router.navigate(['/']); //TODO moet worden customer aanmaken pagina
       }, error => {
         alert('Het registreren is mislukt');
       }
@@ -72,14 +71,13 @@ export class UserService {
       }
       this.returnToPage();
     }, error => {
-      console.log('error: ', error);
       alert('Het inloggen is mislukt');
     });
   }
 
   logout(): void {
     this.authService.deleteAuthorization();
-    this.loggedInUser = {};
+    this.loggedInUser = null;
     this._userSubject.next(this.loggedInUser);
     this.router.navigate(['/auth']);
   }
@@ -92,7 +90,7 @@ export class UserService {
     return this.loggedInUser !== null;
   }
 
-  getLoggedInUser(): User {
+  getLoggedInUser(): User|null {
     return this.loggedInUser;
   }
 }

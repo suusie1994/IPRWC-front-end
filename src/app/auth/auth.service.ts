@@ -1,9 +1,4 @@
 import { Injectable } from '@angular/core';
-import { User } from '../user/user.model';
-import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { ApiService } from '../shared/api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +31,7 @@ export class AuthService {
 
   deleteAuthorization(): void {
     localStorage.removeItem('token');
-    this.token = '';
+    this.token = null;
   }
 
   createAuthorizationString(): string {
