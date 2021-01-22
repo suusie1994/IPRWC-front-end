@@ -101,7 +101,7 @@ export class UserService {
       if (remember) {
         this.authService.storeAuthorization();
       }
-      this.returnToPage();
+      this.router.navigate(['../user/' + this.loggedInUser?.id]);
     }, error => {
       alert('Het inloggen is mislukt');
     });
