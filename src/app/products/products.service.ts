@@ -21,4 +21,8 @@ export class ProductsService {
   getAllProducts(): Product[] {
     return this.products.slice();
   }
+
+  getProductById(id: number): Product {
+    return this.products[id];
+  }
 }
