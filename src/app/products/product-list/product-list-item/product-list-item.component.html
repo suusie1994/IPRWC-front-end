@@ -1,0 +1,17 @@
+<div class="product-card">
+  <div class="product-image-container">
+    <img 
+      [src]="product.image" 
+      alt="{{product.name}}" 
+      style="width: 100px;"
+      class="product-image"/>
+  </div>
+  <div class="product-info">
+    <h3>{{ product.name }}</h3>
+    <p class="produtct-description">{{ product.description }}</p>
+    <p>&#8364; {{ product.price }}</p>
+  </div>
+  <div class="btn-open-product">
+    <button class="btn btn-primary">Bekijk product</button> <!-- navigatie naar product toevoegen! -->
+  </div>
+</div>

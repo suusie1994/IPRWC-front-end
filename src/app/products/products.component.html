@@ -1,1 +1,10 @@
-<p>products works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <app-product-list [products]="products"></app-product-list>
+    </div>
+    <div class="col-md-7">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

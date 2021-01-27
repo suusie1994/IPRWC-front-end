@@ -1,0 +1,9 @@
+.container {
+  margin-bottom: 50px;
+}
+.thumbnail {
+  height: 330px;
+}
+.thumbnail-image {
+  max-height: 175px;
+}
