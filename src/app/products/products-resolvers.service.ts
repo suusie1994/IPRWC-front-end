@@ -9,6 +9,10 @@ export class ProductsResolverService implements Resolve<Product[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Product[] {
     const products = this.productsService.getAllProducts();
-    return products;
+    if (products.length === 0) {
+      return this.productsService.getProductsFromServer();
+    } else {
+      return products;
+    }
   }
 }

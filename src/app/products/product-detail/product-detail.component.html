@@ -1,1 +1,42 @@
-<p>product-detail works!</p>
+<!-- terug knop naar producten -->
+<div class="row">
+  <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-1">
+    <button 
+      type="button" 
+      class="btn btn-link" 
+      routerLink="/products" 
+      routerLinkActive="router-link-active"
+     ><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Terug naar producten</button>
+  </div>
+</div>
+<!-- product details -->
+<div class="row">
+  <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-1">
+    <h1>{{ product.name }}</h1>
+    <img 
+      [src]="product.image" 
+      alt="{{product.name}}" 
+      style="width: 300px;"
+      class="product-image"/>
+  </div>
+  <div class="col-sm-5 col-md-4 product-details">
+    <p class="produtct-description">{{ product.description }}</p>
+    <p>&#8364; {{ product.price }}</p>
+    <p>aantal bechikbaar: {{ product.amount }}</p>
+    <div class="input-group">
+      <input 
+        type="number" 
+        name="amountToCart" 
+        id="amountToCart" 
+        class="form-control" 
+        style="width: 75px;"
+        min="1"
+        [max]="product.amount"/>
+
+      <button 
+        type="button" 
+        class="btn btn-primary"
+        >In winkelwagen</button>
+    </div>
+  </div>
+</div>

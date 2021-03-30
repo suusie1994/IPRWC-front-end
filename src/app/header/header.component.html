@@ -1,35 +1,43 @@
-<div class="navbar navbar-default">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" (click)="collapsed = !collapsed">
-      <span class="icon-bar" *ngFor="let iconBar of [1, 2, 3]"></span>
-      </button>
       <a routerLink="/products" class="navbar-brand">KERSTWEBSHOP</a>
+      <button 
+        class="navbar-toggler" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation"
+        (click)="collapsed = !collapsed">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     </div>
-    <div class="navbar-collapse" [class.collapse]="collapsed" (window:resize)="collapsed = true">
-      <ul class="nav navbar-nav">
+    <div class="navbar-collapse collapse" [class.collapse]="collapsed" (window:resize)="collapsed = true">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!-- als niet ingelogd -->
         <!-- *ngIf="isAuthenticated" -->
-        <li routerLinkAvtive="active" *ngIf="!isAuthenticated">
-          <a routerLink="/auth">Login</a>
+        <li routerLinkAvtive="active" *ngIf="!isAuthenticated" class="nav-item">
+          <a class="nav-link" routerLink="/auth">Login</a>
         </li> 
         <!-- als ingelogd -->
         <!-- *ngIf="isAuthenticated" -->
-        <li routerLinkAvtive="active" *ngIf="isAuthenticated">
-          <a routerLink="/user">Acount</a>
+        <li routerLinkAvtive="active" *ngIf="isAuthenticated" class="nav-item">
+          <a class="nav-link" routerLink="/user">Acount</a>
         </li>
         <!-- Winkelwagen -->
-        <li routerLinkAvtive="active">
-          <a routerLink="/cart">Winkelwagen</a>
+        <li routerLinkAvtive="active" class="nav-item">
+          <a class="nav-link" routerLink="/cart">Winkelwagen</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!-- *ngIf="isAuthenticated" -->
-        <li *ngIf="isAuthenticated">
-          <a style="cursor: pointer;" (click)="onLogout()">Logout</a>
+        <li class="nav-item" *ngIf="isAuthenticated">
+          <a class="nav-link" style="cursor: pointer;" (click)="onLogout()">Logout</a>
         </li>
       </ul>
 
     </div>
   </div>
-</div>
+</nav>

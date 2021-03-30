@@ -12,13 +12,18 @@ export class ProductsService {
   productsChanged = new Subject<Product[]>();
 
   constructor(private http: HttpClient) {
+    this.getProductsFromServer();
+  }
+
+  getAllProducts(): Product[] {
+    return this.products.slice();
+  }
+
+  getProductsFromServer(): Product[] {
     this.http.get<Product[]>('http://localhost:8080/api/products').subscribe(data => {
       this.products = data;
       this.productsChanged.next(this.products.slice());
     });
-  }
-
-  getAllProducts(): Product[] {
     return this.products.slice();
   }
 
