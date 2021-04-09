@@ -4,7 +4,7 @@ import { Product } from './product.model';
 import { ProductsService } from './products.service';
 
 @Injectable({ providedIn: 'root'})
-export class ProductsResolverService implements Resolve<Product[]> {
+export class ProductsResolversService implements Resolve<Product[]> {
   constructor(private productsService: ProductsService){}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Product[] {

@@ -1,9 +1,6 @@
 .product-details{
   padding-top: 50px;
 }
-.amount-to-cart {
- display: flex;
-}
 .amount-input{
   width: 100px;
   margin-right: 5px;

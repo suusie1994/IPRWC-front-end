@@ -1,18 +1,22 @@
 <div class="container">
   <!-- terug knop naar producten -->
-<div class="row">
-  <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-1">
-    <button 
-      type="button" 
-      class="btn btn-link" 
-      routerLink="/products" 
-      routerLinkActive="router-link-active"
-     ><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Terug naar producten</button>
+  <div class="row">
+    <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-1">
+      <button 
+        type="button" 
+        class="btn btn-link" 
+        routerLink="/products" 
+        routerLinkActive="router-link-active"
+      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+      </svg>
+        Terug naar producten</button>
+    </div>
   </div>
-</div>
-<!-- product details -->
-<div class="row">
-  <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-1">
+  <!-- product details -->
+  <div class="row">
+    <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-1">
       <h1>{{ product.name }}</h1>
       <img 
         [src]="product.image" 
@@ -23,20 +27,23 @@
     <div class="col-sm-5 col-md-4 product-details">
       <p class="produtct-description">{{ product.description }}</p>
       <p><b>Prijs:</b> &#8364; {{ product.price }}</p>
-      <p>aantal bechikbaar: {{ product.amount }}</p>
+      <p>Aantal beschikbaar: {{ product.amount }}</p>
       <div class="amount-to-cart">
-        <input 
-          type="number" 
-          name="amountToCart" 
-          id="amountToCart" 
-          class="form-control amount-input" 
-          min="1"
-          [max]="product.amount"/>
-
-        <button 
-          type="button" 
-          class="btn btn-primary"
-          >In winkelwagen</button>
+        <form (ngSubmit)="productToCard(f)" #f="ngForm" class="form-inline">
+          <input 
+            type="number" 
+            name="amountToCart" 
+            id="amountToCart" 
+            class="form-control amount-input" 
+            min="1"
+            [max]="product.amount"
+            ngModel
+          />
+          <button 
+            type="submit" 
+            class="btn btn-primary"
+            >In winkelwagen</button>
+        </form>
       </div>
     </div>
   </div>
