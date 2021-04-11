@@ -38,6 +38,7 @@ export class ProductDetailComponent implements OnInit {
       updatedProduct.amount = this.product.amount - value.amountToCart;
     }
     this.productsService.updateProduct(updatedProduct);
+    form.resetForm();
     this.router.navigate([this.router.url]);
   }
   closeAlert(): void{
