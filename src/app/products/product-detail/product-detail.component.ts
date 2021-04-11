@@ -13,6 +13,7 @@ import { ProductsService } from '../products.service';
 export class ProductDetailComponent implements OnInit {
   product!: Product;
   productId!: number;
+  showAlert = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,11 +31,16 @@ export class ProductDetailComponent implements OnInit {
   productToCard(form: NgForm): void{
     const value = form.value;
     this.cartService.addProductToCart(this.productId, value.amountToCart);
+    this.showAlert = true;
+
     const updatedProduct = this.product;
     if (this.product.amount) {
       updatedProduct.amount = this.product.amount - value.amountToCart;
     }
     this.productsService.updateProduct(updatedProduct);
-    this.router.navigate(['/cart']);
+    this.router.navigate([this.router.url]);
+  }
+  closeAlert(): void{
+    this.showAlert = false;
   }
 }

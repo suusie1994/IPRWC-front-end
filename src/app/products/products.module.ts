@@ -7,6 +7,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductListItemComponent } from './product-list/product-list-item/product-list-item.component';
 import { ProductsResolversService } from './products-resolvers.service';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ProductsResolversService } from './products-resolvers.service';
   imports: [
     CommonModule,
     FormsModule,
-    ProductRoutingModule
+    ProductRoutingModule,
+    SharedModule
   ],
   providers: [
     ProductsResolversService

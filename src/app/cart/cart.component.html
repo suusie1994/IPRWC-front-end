@@ -1,2 +1,29 @@
-<p>cart works!</p>
-{{cartItems}}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Winkelwagen</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="list-group list-group-flush">
+        <div class="list-group-item" *ngFor="let item of cartItems">
+          <div class="d-flex w-500 justify-content-between">
+            <div class="d-flex w-25 justify-content-between align-items-center">
+              <img 
+                [src]="getProductById(item.productId).image" 
+                alt="{{getProductById(item.productId).name}}" 
+                style="width: 50px;"
+                class="product-image"/>
+              <h5>{{ getProductById(item.productId).name }}</h5>
+            </div>
+            <div class="d-flex w-25 justify-content-between align-items-center">
+              <p>Aantal: {{ item.amount }}</p>
+              <p> &#8364; {{ getProductById(item.productId)!.price }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

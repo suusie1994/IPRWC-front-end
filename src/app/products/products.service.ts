@@ -12,7 +12,8 @@ export class ProductsService {
   private products: Product[] = [];
   productsChanged = new Subject<Product[]>();
 
-  constructor(private http: HttpClient, private apiService: ApiService) {
+  constructor(private http: HttpClient,
+              private apiService: ApiService) {
     this.getProductsFromServer();
   }
 

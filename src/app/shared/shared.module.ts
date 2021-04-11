@@ -3,16 +3,15 @@ import { CommonModule } from '@angular/common';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 
-
 @NgModule({
   declarations: [
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
   ]
 })
 export class SharedModule { }
