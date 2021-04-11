@@ -64,23 +64,32 @@ export class CartService {
     } else {
       newCartItem = new CartItem(id, productId, amount, 0);
     }
-    this.cartItems.push(newCartItem);
     // cartitem to db
     const headers = this.apiService.createRequestHeaders();
     this.http.put<CartItem>('http://localhost:8080/api/cart/create', newCartItem, {headers})
-    .subscribe(data => {
+    .subscribe(() => {
       this.getCartItems();
       this.cartItemsChanged.next(this.cartItems.slice());
     });
   }
 
+  updateCartItem(cartItem: CartItem) {
+    const headers = this.apiService.createRequestHeaders();
+    this.http.post<CartItem>('http://localhost:8080/api/products/update', cartItem, { headers })
+    .subscribe(data => {
+      this.cartItemsChanged.next(this.cartItems.slice());
+    });
+  }
+
   removeCartItemById(id: number): void {
-    this.http.delete('http://localhost:8080/api/cart' + id);
+    this.http.delete('http://localhost:8080/api/cart/' + id).subscribe(() => {
+      this.getCartItems();
+      this.cartItemsChanged.next(this.cartItems.slice());
+    });
   }
 
   resetCart(): void {
     this.cartItems = [];
     this.cartItemsChanged.next(this.cartItems.slice());
-    // this.getCartItems();
   }
 }

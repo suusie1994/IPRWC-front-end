@@ -39,10 +39,11 @@ export class ApiService {
     {
       let headers = new HttpHeaders();
 
+      headers = headers.set('Content-Type', 'application/json');
+      headers = headers.set('Accept', 'application/json');
+
       if (this.authService.hasAuthorization())
       {
-        headers = headers.set('Content-Type', 'application/json');
-        headers = headers.set('Accept', 'application/json');
         headers = headers.set('Authorization', this.authService.createAuthorizationString());
       }
       return headers;

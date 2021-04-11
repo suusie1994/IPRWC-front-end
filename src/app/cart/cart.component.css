@@ -1,0 +1,13 @@
+.productName{
+  font-size: larger;
+  color: black;
+}
+.amount-price p{
+  padding-top: 19px;
+}
+.bi-x-square-fill{
+  color: #E42800;
+}
+.amount-input{
+  width: 75px;
+}
