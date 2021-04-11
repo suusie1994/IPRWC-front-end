@@ -54,7 +54,7 @@
         <div class="list-group-item">
           <div class="d-flex w-500 justify-content-between">
             <h5>Totaal:</h5>
-            <h5>&#8364; {{ getTotalPrice() }}</h5>
+            <h5>&#8364; {{ getTotalPrice()  | number:'1.2-2' }}</h5>
           </div>
         </div>
       </div>
