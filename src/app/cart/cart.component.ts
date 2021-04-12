@@ -70,6 +70,10 @@ export class CartComponent implements OnInit, OnDestroy {
     window.location.reload();
   }
 
+  toOrder(): void{
+    // make order, push data to 
+  }
+
   ngOnDestroy(): void {
     this.cartItems = [];
     this.cartService.resetCart();

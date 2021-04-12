@@ -75,7 +75,7 @@ export class CartService {
 
   updateCartItem(cartItem: CartItem) {
     const headers = this.apiService.createRequestHeaders();
-    this.http.post<CartItem>('http://localhost:8080/api/products/update', cartItem, { headers })
+    this.http.post<CartItem>('http://localhost:8080/api/cart/update', cartItem, { headers })
     .subscribe(data => {
       this.cartItemsChanged.next(this.cartItems.slice());
     });
