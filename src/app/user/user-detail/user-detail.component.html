@@ -1,1 +1,84 @@
-<p>user-detail works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form (ngSubmit)="updateUser(f)" #f="ngForm">
+        <!-- name -->
+        <div class="form-group">
+          <label for="name">Naam</label>
+          <div class="form-row" id="name">
+            <div class="col">
+              <input 
+                type="text" 
+                class="form-control" 
+                id="firstname"
+                name="firstname"
+                [ngModel]="currentCustomer.firstname">
+            </div>
+            <div class="col">
+              <input 
+                type="text" 
+                class="form-control" 
+                id="lastname"
+                name="lastname"
+                [ngModel]="currentCustomer.lastname">
+            </div>
+          </div>
+        </div>
+          <!-- email -->
+        <div class="form-group">
+          <label for="emailAddress">Email</label>
+          <input 
+            class="form-control"
+            type="email" 
+            name="emailAddress" 
+            id="emailAddress"
+            [ngModel]="currentCustomer.emailAddress">
+          </div>
+          <!-- adres -->
+          <div class="form-group">
+          <label for="address">Adres</label>
+          <input 
+            class="form-control"
+            type="text" 
+            name="address" 
+            id="address"
+            [ngModel]="currentCustomer.address">
+          </div>
+          <div class="form-group">
+          <div class="form-row" id="zipcode-city">
+            <div class="col">
+              <input 
+                type="text" 
+                class="form-control" 
+                id="zipcode"
+                name="zipcode"
+                [ngModel]="currentCustomer.zipcode">
+            </div>
+            <div class="col">
+              <input 
+                type="text" 
+                class="form-control" 
+                id="city"
+                name="city"
+                [ngModel]="currentCustomer.city">
+            </div>
+          </div>
+          </div>
+          <!-- telefoonnummer -->
+        <div class="form-group">
+          <label for="phoneNumber">Telefoonnummer</label>
+          <input 
+            class="form-control"
+            type="text" 
+            name="phoneNumber" 
+            id="phoneNumber"
+            [ngModel]="currentCustomer.phoneNumber">
+        </div>
+        <!-- submit button -->
+        <div class="form-group">
+          <button class="btn btn-primary">Gegevens bijwerken</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

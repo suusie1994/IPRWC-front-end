@@ -18,7 +18,6 @@ export class UserService {
   // tslint:disable-next-line: variable-name
   private _userSubject: Subject<User|null> = new Subject<User|null>();
 
-
   constructor(private http: HttpClient,
               private api: ApiService,
               private router: Router,
@@ -31,7 +30,8 @@ export class UserService {
   }
 
   public getAll(): Observable<User[]> {
-    return this.http.get<User[]>('http://localhost:8080/api/users');
+    const headers = this.api.createRequestHeaders();
+    return this.http.get<User[]>('http://localhost:8080/api/users', {headers});
   }
 
   login(user: User, remember: boolean): void {
@@ -125,5 +125,23 @@ export class UserService {
 
   getLoggedInUser(): User|null {
     return this.loggedInUser;
+  }
+
+  getCustomerDataOfUser(): Promise<any> {
+    const id = this.getLoggedInUser()?.id;
+    const headers = this.api.createRequestHeaders();
+    return new Promise<Customer>(resolve => {
+      this.http.get<Customer>('http://localhost:8080/api/customers/' + id, {headers})
+      .subscribe(data => {
+        resolve(data);
+      });
+    });
+  }
+  updateCustomerDataOfUser(customer: Customer){
+    const headers = this.api.createRequestHeaders();
+    this.http.post<Customer>('http://localhost:8080/api/customers/update', customer, {headers})
+    .subscribe(data => {
+      console.log(data);
+    });
   }
 }

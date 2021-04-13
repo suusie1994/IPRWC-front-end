@@ -1,1 +1,29 @@
-<p>user works!</p>
+<div class="container">
+  <div class="row">
+    <h2>Acount</h2>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <div class="list-group">
+        <a 
+          class="list-group-item list-group-item-action"
+          [ngClass]="{active : showUserInfo}" 
+          (click)="showUserInfo = true">
+          Gegevens
+        </a>
+        <a
+          class="list-group-item list-group-item-action"
+          [ngClass]="{active : !showUserInfo}" 
+          (click)="showUserInfo = false">
+          Orders
+        </a>
+      </div>      
+    </div>
+    <div class="col-9">
+      <app-user-detail *ngIf="showUserInfo && isDataAvailable" [currentCustomer]="customer"></app-user-detail>
+      <div *ngIf="!showUserInfo">
+        orders hier
+      </div>
+    </div>
+  </div>
+</div>
