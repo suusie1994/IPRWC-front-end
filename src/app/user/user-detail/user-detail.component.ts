@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Customer } from '../customer.model';
 import { UserService } from '../user.service';
@@ -10,15 +10,14 @@ import { UserService } from '../user.service';
 })
 export class UserDetailComponent implements OnInit {
   @Input() currentCustomer!: Customer;
+  @Output() updateCustomerData = new EventEmitter<Customer>();
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    console.log(this.currentCustomer);
   }
 
-  updateUser(form: NgForm): void {
-    console.log(form.value);
+  updateCustomer(form: NgForm): void {
     const updatedCustomer = new Customer(
       this.currentCustomer.id,
       form.value.firstname,
@@ -29,6 +28,7 @@ export class UserDetailComponent implements OnInit {
       form.value.city,
       form.value.phoneNumber);
     this.userService.updateCustomerDataOfUser(updatedCustomer);
+    this.updateCustomerData.next(updatedCustomer);
   }
 
 }

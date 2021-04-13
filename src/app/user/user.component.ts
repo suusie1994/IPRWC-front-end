@@ -21,4 +21,8 @@ export class UserComponent implements OnInit {
     });
   }
 
+  updateCustomer(customer: Customer): void{
+    this.customer = customer;
+  }
+
 }

@@ -20,7 +20,10 @@
       </div>      
     </div>
     <div class="col-9">
-      <app-user-detail *ngIf="showUserInfo && isDataAvailable" [currentCustomer]="customer"></app-user-detail>
+      <app-user-detail 
+        *ngIf="showUserInfo && isDataAvailable" 
+        [currentCustomer]="customer"
+        (updateCustomerData)="updateCustomer($event)"></app-user-detail>
       <div *ngIf="!showUserInfo">
         orders hier
       </div>

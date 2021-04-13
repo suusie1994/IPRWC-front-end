@@ -17,6 +17,8 @@ export class UserService {
   private loggedInUser: User | null = null;
   // tslint:disable-next-line: variable-name
   private _userSubject: Subject<User|null> = new Subject<User|null>();
+  customerChanged = new Subject<Customer>();
+  private customer: Customer = {};
 
   constructor(private http: HttpClient,
               private api: ApiService,
@@ -133,7 +135,9 @@ export class UserService {
     return new Promise<Customer>(resolve => {
       this.http.get<Customer>('http://localhost:8080/api/customers/' + id, {headers})
       .subscribe(data => {
-        resolve(data);
+        this.customer = data;
+        this.customerChanged.next(this.customer);
+        resolve(this.customer);
       });
     });
   }
@@ -141,7 +145,8 @@ export class UserService {
     const headers = this.api.createRequestHeaders();
     this.http.post<Customer>('http://localhost:8080/api/customers/update', customer, {headers})
     .subscribe(data => {
-      console.log(data);
+      this.customer = data;
+      this.customerChanged.next(this.customer);
     });
   }
 }
