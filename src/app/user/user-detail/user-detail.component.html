@@ -4,9 +4,9 @@
       <form (ngSubmit)="updateCustomer(f)" #f="ngForm">
         <!-- name -->
         <div class="form-group">
-          <label for="name">Naam</label>
-          <div class="form-row" id="name">
+          <div class="form-row">
             <div class="col">
+              <label for="firstname">Voornaam</label>
               <input 
                 type="text" 
                 class="form-control" 
@@ -15,6 +15,7 @@
                 [ngModel]="currentCustomer.firstname">
             </div>
             <div class="col">
+              <label for="lastname">Achternaam</label>
               <input 
                 type="text" 
                 class="form-control" 
@@ -47,6 +48,7 @@
           <div class="form-group">
           <div class="form-row" id="zipcode-city">
             <div class="col">
+              <label for="zipcode">Postcode</label>
               <input 
                 type="text" 
                 class="form-control" 
@@ -55,6 +57,7 @@
                 [ngModel]="currentCustomer.zipcode">
             </div>
             <div class="col">
+              <label for="city">Woonplaats</label>
               <input 
                 type="text" 
                 class="form-control" 
