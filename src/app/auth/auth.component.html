@@ -1,131 +1,133 @@
-<div class="row loginsignup">
-  <div class="col-xs-6 col-xs-offset-3 col-md-6 col-md-offset-3">
-    <div *ngIf="isLoading" style="text-align: center;">
-      <app-loading-spinner></app-loading-spinner>
+<div class="continer">
+  <div class="row justify-content-md-center loginsignup">
+    <div class="col-xs-6 col-md-6">
+      <div *ngIf="isLoading" style="text-align: center;">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+  
+      <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+        <div class="form-group">
+          <label for="username">Gebruikernaam</label>
+          <input 
+            type="text"
+            id="username"
+            class="form-control"
+            ngModel
+            name="username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Wachtwoord</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            ngModel
+            name="password"
+            required
+            minlength="6"
+          />
+        </div>
+        <div *ngIf="!isLoginMode">
+          <hr>
+          <div class="form-group">
+            <label for="firstname">Voornaam</label>
+            <input 
+              type="text"
+              id="firstname"
+              class="form-control"
+              ngModel
+              name="firstname"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="lastname">Achternaam</label>
+            <input 
+              type="text"
+              id="lastname"
+              class="form-control"
+              ngModel
+              name="lastname"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="emailAddress">Emailadres</label>
+            <input 
+              type="email"
+              id="emailAddress"
+              class="form-control"
+              ngModel
+              name="emailAddress"
+              required
+              email
+            />
+          </div>
+          <div class="form-group">
+            <label for="address">Adres</label>
+            <input 
+              type="text"
+              id="address"
+              class="form-control"
+              ngModel
+              name="address"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="zipcode">Postcode</label>
+            <input 
+              type="text"
+              id="zipcode"
+              class="form-control"
+              ngModel
+              name="zipcode"
+              required
+              min="6"
+              maxlength="7"
+            />
+          </div>
+          <div class="form-group">
+            <label for="city">Plaatsnaam</label>
+            <input 
+              type="text"
+              id="city"
+              class="form-control"
+              ngModel
+              name="city"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Telefoon nummer</label>
+            <input 
+              type="text"
+              id="phoneNumber"
+              class="form-control"
+              ngModel
+              name="phoneNumber"
+              required
+              minlength="10"
+              maxlength="13"
+            />
+          </div>
+        </div>
+        <div>
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="!authForm.valid"
+          >
+            {{ isLoginMode ? 'Inloggen' : 'Acount aanmaken' }}
+          </button>
+          |
+          <button class="btn btn-primary" (click)="onSwitchMode()" type="button">
+            {{ isLoginMode ? 'Acount aanmaken' : 'Inloggen' }}
+          </button>
+        </div>
+      </form>
     </div>
-
-    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
-      <div class="form-group">
-        <label for="username">Gebruikernaam</label>
-        <input 
-          type="text"
-          id="username"
-          class="form-control"
-          ngModel
-          name="username"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          class="form-control"
-          ngModel
-          name="password"
-          required
-          minlength="6"
-        />
-      </div>
-      <div *ngIf="!isLoginMode">
-        <hr>
-        <div class="form-group">
-          <label for="firstname">Voornaam</label>
-          <input 
-            type="text"
-            id="firstname"
-            class="form-control"
-            ngModel
-            name="firstname"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="lastname">Achternaam</label>
-          <input 
-            type="text"
-            id="lastname"
-            class="form-control"
-            ngModel
-            name="lastname"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="emailAddress">Emailadres</label>
-          <input 
-            type="email"
-            id="emailAddress"
-            class="form-control"
-            ngModel
-            name="emailAddress"
-            required
-            email
-          />
-        </div>
-        <div class="form-group">
-          <label for="address">Adres + huisnummer</label>
-          <input 
-            type="text"
-            id="address"
-            class="form-control"
-            ngModel
-            name="address"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="zipcode">Postcode</label>
-          <input 
-            type="text"
-            id="zipcode"
-            class="form-control"
-            ngModel
-            name="zipcode"
-            required
-            min="6"
-            maxlength="7"
-          />
-        </div>
-        <div class="form-group">
-          <label for="city">Plaatsnaam</label>
-          <input 
-            type="text"
-            id="city"
-            class="form-control"
-            ngModel
-            name="city"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="phoneNumber">Telefoon nummer</label>
-          <input 
-            type="text"
-            id="phoneNumber"
-            class="form-control"
-            ngModel
-            name="phoneNumber"
-            required
-            minlength="10"
-            maxlength="13"
-          />
-        </div>
-      </div>
-      <div>
-        <button
-          class="btn btn-primary"
-          type="submit"
-          [disabled]="!authForm.valid"
-        >
-          {{ isLoginMode ? 'Login' : 'Sign Up' }}
-        </button>
-        |
-        <button class="btn btn-primary" (click)="onSwitchMode()" type="button">
-          {{ isLoginMode ? 'Sign Up' : 'Login' }}
-        </button>
-      </div>
-    </form>
   </div>
 </div>

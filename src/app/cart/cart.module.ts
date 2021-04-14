@@ -10,7 +10,6 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     RouterModule.forChild([{ path: '', component: CartComponent }]),
     FormsModule
-
   ]
 })
 export class CartModule { }

@@ -73,12 +73,28 @@ export class CartService {
     });
   }
 
-  updateCartItem(cartItem: CartItem) {
+  updateCartItem(cartItem: CartItem): Promise<any>  {
     const headers = this.apiService.createRequestHeaders();
-    this.http.post<CartItem>('http://localhost:8080/api/cart/update', cartItem, { headers })
-    .subscribe(data => {
-      this.cartItemsChanged.next(this.cartItems.slice());
+    return new Promise<any>(resolve => {
+      this.http.post<CartItem>('http://localhost:8080/api/cart/update', cartItem, { headers })
+      .subscribe(data => {
+        this.cartItemsChanged.next(this.cartItems.slice());
+      });
+      resolve(this.cartItems.slice());
     });
+  }
+  addCarteItemsToCustomer(cartItemsInCart: CartItem[]) {
+    const userId = this.userService.getLoggedInUser()?.id;
+    console.log(userId);
+    
+    // for (const itemInCart of cartItemsInCart) {
+    //   console.log(itemInCart);
+    //   itemInCart.userId = userId;
+    //   console.log(itemInCart);
+    //   this.updateCartItem(itemInCart);
+    // }
+    // console.log(this.cartItems);
+    
   }
 
   removeCartItemById(id: number): void {

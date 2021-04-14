@@ -23,9 +23,12 @@
       <app-user-detail 
         *ngIf="showUserInfo && isDataAvailable" 
         [currentCustomer]="customer"
-        (updateCustomerData)="updateCustomer($event)"></app-user-detail>
-      <div *ngIf="!showUserInfo">
+        (updateCustomerData)="updateCustomer($event)">
+      </app-user-detail>
+
+      <div *ngIf="!showUserInfo && isDataAvailable">
         orders hier
+        {{orders}}
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 import {
-  Component,
+  Component, Input,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Customer } from '../user/customer.model';
@@ -40,17 +40,13 @@ export class AuthComponent {
 
     if (this.isLoginMode) {
       // login
-      this.userService.login({username, password}, true);
+      this.userService.login({username, password}, true, true, '..');
       this.isLoading = false;
     } else {
       // signup
-      this.userService.register({username, password, roles: ['CUSTOMER']}, customer);
+      this.userService.register({username, password, roles: ['CUSTOMER']}, customer, true);
       this.isLoading = false;
     }
-
-    // gelukt? isloading false en navigeren naar/products of account
-    // mislukt? show error en is loading naar false
-
     form.reset();
   }
 
