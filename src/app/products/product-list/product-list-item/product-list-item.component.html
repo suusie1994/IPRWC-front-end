@@ -1,13 +1,14 @@
-<div class="card">
+<div class="card text-center">
+  <div class="card-header">
+    <h3 class="card-title">{{ product.name }}</h3>
+  </div>
   <img 
     [src]="product.image" 
     alt="{{product.name}}" 
-    style="width: 130px;"
-    class="card-img-top"/>
-  <div class="card-body">
-    <h3 class="card-title">{{ product.name }}</h3>
+    class="card-img product-image"/>
+  <div class="c">
     <p class="card-text product-description">{{ product.description }}</p>
-    <p class="card-text">&#8364; {{ product.price }}</p>
+    <p class="card-text product-price">&#8364; {{ product.price }}</p>
   </div>
   <div class="btn-open-product">
     <button class="btn btn-primary" [routerLink]="[index]">Bekijk product</button>

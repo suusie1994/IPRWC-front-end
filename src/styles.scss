@@ -1,0 +1,13 @@
+$primary: darkgreen !default;
+$theme-colors: (
+  "primary": #006600,
+  "danger": #E42800,
+);
+$breadcrumb-bg: white;
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+body {
+  margin-bottom: 65px;
+  background-color: #006600e7;
+}
