@@ -1,0 +1,23 @@
+.container {
+  margin-top: 25px;
+  padding: 5px;
+  background-color: #ffffff;
+  width: 90vw;
+}
+.title {
+ margin-left: 10px;
+}
+.list-group {
+  overflow: hidden;
+}
+.account-list-group-row {
+  flex-direction: column;
+  width: 100vw;
+}
+.account-list-group{
+  max-width: 45%;
+  margin-left: 10px;
+}
+.order-list-row {
+  margin-top: 10px;
+}
