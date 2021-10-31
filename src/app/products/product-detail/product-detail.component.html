@@ -1,7 +1,7 @@
 <div class="container">
   <!-- alert -->
   <div class="alert alert-success" role="alert" *ngIf="showAlert">
-    Het product is succesvol toegevoegd aan de winkelwagen!
+    Het product is succesvol toegevoegd aan de winkelwagen! <a [routerLink]="['/cart']" class="alert-link">Open winkelwagen.</a>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
       <span aria-hidden="true">&times;</span>
     </button>
