@@ -24,15 +24,13 @@
   </div>
   <!-- product details -->
   <div class="row product-details-row">
-    <div class="col product-image-col">
+    <div class="col product-image-col text-center">
       <h1>{{ product.name }}</h1>
-      <div class="text-center">
         <img 
         [src]="product.image" 
         alt="{{product.name}}" 
         class="product-image "/>
-      </div>
-    </div>
+     </div>
     <div class="col product-details">
       <p class="produtct-description">{{ product.description }}</p>
       <p><b>Prijs:</b> &#8364; {{ product.price }}</p>
