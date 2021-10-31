@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Order } from '../order/order.model';
 import { OrdersService } from '../order/orders.service';
 import { Product } from '../products/product.model';
 import { ProductsService } from '../products/products.service';

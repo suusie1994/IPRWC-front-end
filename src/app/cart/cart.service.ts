@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { literal } from '@angular/compiler/src/output/output_ast';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { ApiService } from '../shared/api.service';
@@ -82,18 +81,6 @@ export class CartService {
       });
       resolve(this.cartItems.slice());
     });
-  }
-  addCarteItemsToCustomer(cartItemsInCart: CartItem[]) {
-    const userId = this.userService.getLoggedInUser()?.id;
-
-    // for (const itemInCart of cartItemsInCart) {
-    //   console.log(itemInCart);
-    //   itemInCart.userId = userId;
-    //   console.log(itemInCart);
-    //   this.updateCartItem(itemInCart);
-    // }
-    // console.log(this.cartItems);
-
   }
 
   removeCartItemById(id: number): void {
