@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col cart-items">
       <div class="list-group list-group-flush">
         <div class="list-group-item" *ngFor="let item of cartItems">
           <div class="d-flex w-500 justify-content-between">
@@ -13,7 +13,6 @@
               <img 
                 [src]="getProductById(item.productId).image" 
                 alt="{{getProductById(item.productId).name}}" 
-                style="width: 50px;"
                 class="product-image"/>
               <a class="productName" routerLink="/products/{{item.productId}}">{{ getProductById(item.productId).name }}</a>
             </div>
@@ -69,6 +68,7 @@
     </div>
   </div>
 </div>
+
 <!-- overlay -->
 <div class="overlay" *ngIf="showModal" (click)="closeModal()"></div>
 <!-- modal -->
