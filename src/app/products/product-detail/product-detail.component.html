@@ -12,7 +12,7 @@
     <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-1">
       <button 
         type="button" 
-        class="btn btn-link" 
+        class="btn btn-primary" 
         routerLink="/products" 
         routerLinkActive="router-link-active"
       >
@@ -23,16 +23,17 @@
     </div>
   </div>
   <!-- product details -->
-  <div class="row">
-    <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-1 col-4 ">
+  <div class="row product-details-row">
+    <div class="col product-image-col">
       <h1>{{ product.name }}</h1>
-      <img 
+      <div class="text-center">
+        <img 
         [src]="product.image" 
         alt="{{product.name}}" 
-        style="width: 300px;"
-        class="product-image"/>
+        class="product-image "/>
+      </div>
     </div>
-    <div class="col-sm-5 col-md-4 col-4 product-details">
+    <div class="col product-details">
       <p class="produtct-description">{{ product.description }}</p>
       <p><b>Prijs:</b> &#8364; {{ product.price }}</p>
       <p>Aantal beschikbaar: {{ product.amount }}</p>
@@ -49,7 +50,7 @@
           />
           <button 
             type="submit" 
-            class="btn btn-primary"
+            class="btn btn-primary to-cart-btn"
             >In winkelwagen</button>
         </form>
       </div>

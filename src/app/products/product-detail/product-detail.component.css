@@ -1,7 +1,32 @@
+.container {
+  margin-top: 25px;
+  padding: 5px;
+  background-color: #fff;
+  width: 90vw;
+}
 .product-details{
   padding-top: 50px;
 }
 .amount-input{
   width: 100px;
   margin-right: 5px;
+}
+.product-image {
+  width: 300px;
+  margin: 0px 0px 10px 10px;
+}
+@media only screen and (max-width: 767px) {
+  .product-details-row {
+    flex-direction: column;
+  }
+  .product-image {
+    width: 200px;
+    margin: 0px 0px 10px 10px;
+  }
+  .product-details {
+    margin: 0px 0px 10px 10px;
+  }
+  .to-cart-btn {
+    margin: 5px 0px;
+  }
 }
