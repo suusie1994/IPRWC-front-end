@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { literal } from '@angular/compiler/src/output/output_ast';
 import { Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
@@ -56,13 +57,12 @@ export class CartService {
   }
 
   addProductToCart(productId: number, amount: number): void {
-    const id = this.cartItems.length;
     const userId = this.userService.getLoggedInUser()?.id;
     let newCartItem: CartItem;
     if (this.userService.getLoggedInUser()?.id){
-      newCartItem = new CartItem(id, productId, amount, userId);
+      newCartItem = new CartItem(productId, amount, userId);
     } else {
-      newCartItem = new CartItem(id, productId, amount, 0);
+      newCartItem = new CartItem(productId, amount, 0);
     }
     // cartitem to db
     const headers = this.apiService.createRequestHeaders();
@@ -85,8 +85,7 @@ export class CartService {
   }
   addCarteItemsToCustomer(cartItemsInCart: CartItem[]) {
     const userId = this.userService.getLoggedInUser()?.id;
-    console.log(userId);
-    
+
     // for (const itemInCart of cartItemsInCart) {
     //   console.log(itemInCart);
     //   itemInCart.userId = userId;
@@ -94,7 +93,7 @@ export class CartService {
     //   this.updateCartItem(itemInCart);
     // }
     // console.log(this.cartItems);
-    
+
   }
 
   removeCartItemById(id: number): void {

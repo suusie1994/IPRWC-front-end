@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Order } from '../order/order.model';
+import { OrdersService } from '../order/orders.service';
 import { Product } from '../products/product.model';
 import { ProductsService } from '../products/products.service';
 import { UserService } from '../user/user.service';
@@ -22,7 +24,8 @@ export class CartComponent implements OnInit, OnDestroy {
   constructor(private cartService: CartService,
               private productService: ProductsService,
               private router: Router,
-              private userService: UserService) { }
+              private userService: UserService,
+              private orderService: OrdersService) { }
 
   ngOnInit(): void {
     this.cartItems = [];
@@ -38,12 +41,13 @@ export class CartComponent implements OnInit, OnDestroy {
   getTotalPrice(): number {
     let overallPrice = 0;
     for (const item of this.cartItems) {
+      // tslint:disable-next-line: no-non-null-assertion
       overallPrice = overallPrice + (parseFloat(this.getProductById(item.productId).price!.replace(/,/g, '.')) * item.amount);
     }
     return overallPrice;
   }
 
-  updateAmountInCart(form: NgForm, cartItem: CartItem){
+  updateAmountInCart(form: NgForm, cartItem: CartItem): void{
     const newAmount: number = form.value.amount;
     const updatedProduct: Product = this.getProductById(cartItem.productId);
     if (updatedProduct.amount && cartItem.amount > newAmount){
@@ -65,7 +69,9 @@ export class CartComponent implements OnInit, OnDestroy {
     }
     this.productService.updateProduct(updatedProduct);
 
-    this.cartService.removeCartItemById(cartItem.id);
+    if (cartItem.id){
+      this.cartService.removeCartItemById(cartItem.id);
+    }
 
     window.location.reload();
   }
@@ -75,15 +81,14 @@ export class CartComponent implements OnInit, OnDestroy {
     if (!this.userService.isUserLoggedIn()){
       this.showModal = true;
     } else{
-      // ingelogd? ga naar orders
-      this.router.navigate(['/orders']);
+      this.continueOrder();
     }
   }
 
   onSwitchMode(): void{
     this.isLoginMode = !this.isLoginMode;
   }
-  onSubmit(form: NgForm){
+  onSubmit(form: NgForm): void{
     if (!form.valid){
       return;
     }
@@ -102,25 +107,38 @@ export class CartComponent implements OnInit, OnDestroy {
     if (this.isLoginMode) {
       // login
       this.userService.login({username, password}, true, false).then(() => {
+        this.updateCartItems();
         this.continueOrder();
       });
     } else {
       // signup
       this.userService.register({username, password, roles: ['CUSTOMER']}, customer, false).then(() => {
+        this.updateCartItems();
         this.continueOrder();
       });
     }
     form.reset();
   }
-  continueOrder(): void{
+
+  updateCartItems(): void{
     const id = this.userService.getLoggedInUser()?.id;
     for (const item of this.cartItems){
       item.userId = id;
       this.cartService.updateCartItem(item).then(data => {
-        console.log(data);
+        this.cartItems = data;
       });
     }
-    this.router.navigate(['/orders']);
+  }
+
+  async continueOrder(): Promise<void>{
+    const createdOrder = await this.orderService.createOrder(this.cartItems);
+    for (const item of this.cartItems) {
+      if (item.id){
+        this.cartService.removeCartItemById(item.id);
+      }
+    }
+    this.cartItems = [];
+    this.router.navigate(['/orders', createdOrder.id]);
   }
 
   closeModal(): void{

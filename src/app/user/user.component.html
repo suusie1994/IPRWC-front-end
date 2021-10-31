@@ -7,13 +7,15 @@
       <div class="list-group">
         <a 
           class="list-group-item list-group-item-action"
-          [ngClass]="{active : showUserInfo}" 
+          [ngClass]="{active : showUserInfo}"
+          [routerLink]="['/user']"
           (click)="showUserInfo = true">
           Gegevens
         </a>
         <a
           class="list-group-item list-group-item-action"
           [ngClass]="{active : !showUserInfo}" 
+          [routerLink]="['/user/orders']"
           (click)="showUserInfo = false">
           Orders
         </a>
@@ -26,9 +28,17 @@
         (updateCustomerData)="updateCustomer($event)">
       </app-user-detail>
 
-      <div *ngIf="!showUserInfo && isDataAvailable">
-        orders hier
-        {{orders}}
+      <div class="row" *ngIf="!showUserInfo && isDataAvailable">
+        <div class="col-4">
+          <app-order-list
+          [orders]="orders"
+          [orderDetails]="orderDetails"
+          [customer]="customer"
+          [route]="'/user/orders'"></app-order-list>
+        </div>
+        <div class="col-8">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
   </div>

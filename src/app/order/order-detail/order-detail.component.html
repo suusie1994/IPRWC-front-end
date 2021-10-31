@@ -1,1 +1,58 @@
-<p>order-detail works!</p>
+<div class="container" *ngIf="order">
+  <div class="row">
+    <h1>Bestelling: {{ order.id }}</h1>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <h4>Gegevens</h4>
+      <p>Naam: {{ customer.firstname }} {{ customer.lastname }}</p>
+      <p>Adres: {{ customer.address }}</p>
+      <p>Postcode: {{customer.zipcode }} {{ customer.city }}</p>
+      <p>Email: {{ customer.emailAddress }}</p>
+      <p>Telefoonnummer: {{ customer.phoneNumber }}</p>
+      <p>Status bestelling: {{ order.status }}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <h4>Producten</h4>
+      <div class="list-group list-group-flush">
+        <div class="list-group-item" *ngFor="let orderProduct of productsOfOrder">
+          <div class="d-flex w-100 justify-content-between">
+            <div class="d-flex w-25 justify-content-start">
+              <img 
+              [src]="orderProduct.image" 
+              alt="{{orderProduct.name}}" 
+              class="prodcut-image"/>
+            </div>
+            <div class="d-flex w-20 flex-column">
+              <h5>{{ orderProduct.name }}</h5>
+              <p class="description">{{ orderProduct.description }}</p>
+            </div>
+            <div class="d-flex w-55 flex-column amount-price">
+              <span>Aantal: {{ orderProduct.amount }}</span>
+              <span>Prijs: &#8364; {{ orderProduct.price }}</span>
+              <span>Totaalprijs: &#8364; {{ getPriceOfOrderProduct(orderProduct.price, orderProduct.amount) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <div class="list-group-flush">
+        <div class="list-group-item">
+          <div class="d-flex w-500 justify-content-between">
+            <h5>Totaal:</h5>
+            <h5>&#8364; {{ getTotalPriceOrder()  | number:'1.2-2' }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
