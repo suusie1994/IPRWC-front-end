@@ -36,7 +36,7 @@ export class UserService {
     return this.http.get<User[]>('http://localhost:8080/api/users', {headers});
   }
 
-  login(user: User, remember: boolean, toRoute?: boolean, routeTo?: string) {
+  login(user: User, remember: boolean, toRoute?: boolean, routeTo?: string): Promise<any> {
     if (user.username && user.password) {
       this.authService.setAuthorization(
         user.username,
@@ -50,7 +50,7 @@ export class UserService {
     });
   }
 
-  register(user: User, customer: Customer, toRoute?: boolean, routeTo?: string) {
+  register(user: User, customer: Customer, toRoute?: boolean, routeTo?: string): Promise<any> {
     const headers = this.api.createRequestHeaders();
     return new Promise<any>(resolve => {
       this.http.put<User>('http://localhost:8080/api/users/create', user, { headers }).toPromise()
@@ -100,7 +100,7 @@ export class UserService {
     });
   }
 
-  authUser(remember?: boolean, toRoute?: boolean, routeTo?: string) {
+  authUser(remember?: boolean, toRoute?: boolean, routeTo?: string): Promise<any> {
     const headers = this.api.createRequestHeaders();
     return new Promise<any>(resolve => {
       this.http.get<User>('http://localhost:8080/api/users/me', {
@@ -138,11 +138,6 @@ export class UserService {
     this.router.navigate(['/auth']);
   }
 
-  private returnToPage(): void {
-    // tslint:disable-next-line: no-string-literal
-    this.router.navigate([this.route.snapshot.queryParams['returnUrl'] || '/']);
-  }
-
   isUserLoggedIn(): boolean {
     return this.loggedInUser !== null;
   }
@@ -163,7 +158,7 @@ export class UserService {
       });
     });
   }
-  updateCustomerDataOfUser(customer: Customer){
+  updateCustomerDataOfUser(customer: Customer): void{
     const headers = this.api.createRequestHeaders();
     this.http.post<Customer>('http://localhost:8080/api/customers/update', customer, {headers})
     .subscribe(data => {
@@ -172,7 +167,9 @@ export class UserService {
     });
   }
   deleteUserAndCustomer(id: number): void {
-    // verwijder customer, user
-    // logout
+    this.logout();
+    const headers = this.api.createRequestHeaders();
+    this.http.delete<Customer>('http://localhost:8080/api/customers/' + id, {headers});
+    this.http.delete<User>('http://localhost:8080/api/users/' + id, {headers});
   }
 }
