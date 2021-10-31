@@ -1,6 +1,6 @@
 .container {
   margin-top: 25px;
-  padding: 5px;
+  padding: 15px;
   background-color: #ffffff;
   width: 90vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -13,7 +13,7 @@
 }
 .account-list-group-row {
   flex-direction: column;
-  width: 100vw;
+  width: 90vw;
 }
 .account-list-group{
   max-width: 45%;
