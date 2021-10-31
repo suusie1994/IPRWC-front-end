@@ -60,9 +60,12 @@
       </div>
     </div>
   </div>
-  <div class="row justify-content-end">
-    <div class="col-2">
-      <button class="btn btn-primary order-btn" (click)="toOrder()">Naar bestellen</button>
+  <div class="row justify-content-between">
+    <div class="col">
+      <button class="btn btn-danger" (click)="emptyCart()">Winkelwagen legen</button>
+    </div>
+    <div class="col align-self-end">
+      <button class="btn btn-primary order-btn float-right" (click)="toOrder()">Naar bestellen</button>
     </div>
   </div>
 </div>

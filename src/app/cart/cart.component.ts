@@ -140,8 +140,17 @@ export class CartComponent implements OnInit, OnDestroy {
     this.router.navigate(['/orders', createdOrder.id]);
   }
 
-  closeModal(): void{
+  closeModal(): void {
     this.showModal = false;
+  }
+
+  emptyCart(): void {
+    for (const item of this.cartItems) {
+      if (item.id){
+        this.cartService.removeCartItemById(item.id);
+      }
+    }
+    this.cartItems = [];
   }
 
   ngOnDestroy(): void {
