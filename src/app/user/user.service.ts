@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { ApiService } from '../shared/api.service';
@@ -23,7 +23,6 @@ export class UserService {
   constructor(private http: HttpClient,
               private api: ApiService,
               private router: Router,
-              private route: ActivatedRoute,
               private authService: AuthService) {
     this.authService.restoreAuthorization();
     if (this.authService.hasAuthorization()) {
