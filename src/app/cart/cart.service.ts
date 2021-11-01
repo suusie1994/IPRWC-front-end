@@ -27,7 +27,7 @@ export class CartService {
     if (this.cartItems.length === 0){
       if (id){
         return new Promise<any>(resolve => {
-          this.http.get<CartItem[]>('http://localhost:8080/api/cart/' + id, {headers})
+          this.http.get<CartItem[]>('http://suzanneblom.nl:8080/api/cart/' + id, {headers})
           .subscribe(data => {
             for (const cartItem of data){
               this.cartItems.push(cartItem);
@@ -38,7 +38,7 @@ export class CartService {
         });
       } else {
         return new Promise<any>(resolve => {
-          this.http.get<CartItem[]>('http://localhost:8080/api/cart/')
+          this.http.get<CartItem[]>('http://suzanneblom.nl:8080/api/cart/')
           .subscribe(data => {
             for (const cartItem of data){
               this.cartItems.push(cartItem);
@@ -65,7 +65,7 @@ export class CartService {
     }
     // cartitem to db
     const headers = this.apiService.createRequestHeaders();
-    this.http.put<CartItem>('http://localhost:8080/api/cart/create', newCartItem, {headers})
+    this.http.put<CartItem>('http://suzanneblom.nl:8080/api/cart/create', newCartItem, {headers})
     .subscribe(() => {
       this.getCartItems();
       this.cartItemsChanged.next(this.cartItems.slice());
@@ -75,7 +75,7 @@ export class CartService {
   updateCartItem(cartItem: CartItem): Promise<any>  {
     const headers = this.apiService.createRequestHeaders();
     return new Promise<any>(resolve => {
-      this.http.post<CartItem>('http://localhost:8080/api/cart/update', cartItem, { headers })
+      this.http.post<CartItem>('http://suzanneblom.nl:8080/api/cart/update', cartItem, { headers })
       .subscribe(data => {
         this.cartItemsChanged.next(this.cartItems.slice());
       });
@@ -84,7 +84,7 @@ export class CartService {
   }
 
   removeCartItemById(id: number): void {
-    this.http.delete('http://localhost:8080/api/cart/' + id).subscribe(() => {
+    this.http.delete('http://suzanneblom.nl:8080/api/cart/' + id).subscribe(() => {
       this.getCartItems();
       this.cartItemsChanged.next(this.cartItems.slice());
     });

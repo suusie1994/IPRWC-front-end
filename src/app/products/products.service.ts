@@ -25,7 +25,7 @@ export class ProductsService {
   }
 
   getProductsFromServer(): Product[] {
-    this.http.get<Product[]>('http://localhost:8080/api/products').subscribe(data => {
+    this.http.get<Product[]>('http://suzanneblom.nl:8080/api/products').subscribe(data => {
       this.products = data;
       this.products.sort((a: Product, b: Product) => a.id - b.id);
       this.productsChanged.next(this.products.slice());
@@ -39,7 +39,7 @@ export class ProductsService {
 
   updateProduct(product: Product): void {
     const headers = this.apiService.createRequestHeaders();
-    this.http.post<Product>('http://localhost:8080/api/products/update', product, { headers })
+    this.http.post<Product>('http://suzanneblom.nl:8080/api/products/update', product, { headers })
     .subscribe(data => {
       this.productsChanged.next(this.products.slice());
     });

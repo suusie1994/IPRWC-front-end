@@ -33,7 +33,7 @@ export class UserService {
 
   public getAll(): Observable<User[]> {
     const headers = this.api.createRequestHeaders();
-    return this.http.get<User[]>('http://localhost:8080/api/users', {headers});
+    return this.http.get<User[]>('http://suzanneblom.nl:8080/api/users', {headers});
   }
 
   login(user: User, remember: boolean, toRoute?: boolean, routeTo?: string): Promise<any> {
@@ -53,7 +53,7 @@ export class UserService {
   register(user: User, customer: Customer, toRoute?: boolean, routeTo?: string): Promise<any> {
     const headers = this.api.createRequestHeaders();
     return new Promise<any>(resolve => {
-      this.http.put<User>('http://localhost:8080/api/users/create', user, { headers }).toPromise()
+      this.http.put<User>('http://suzanneblom.nl:8080/api/users/create', user, { headers }).toPromise()
       .then( () => {
         if (user.username && user.password) {
           this.authService.setAuthorization(
@@ -62,7 +62,7 @@ export class UserService {
           );
         }
         const newheaders = this.api.createRequestHeaders();
-        this.http.get<User>('http://localhost:8080/api/users/me', { headers: newheaders }).toPromise()
+        this.http.get<User>('http://suzanneblom.nl:8080/api/users/me', { headers: newheaders }).toPromise()
         .then(response => {
           const respUser: User = {
             id: response.id,
@@ -73,7 +73,7 @@ export class UserService {
           this._userSubject.next(this.loggedInUser);
           this.authService.storeAuthorization();
         }).then( () => {
-          this.http.put<Customer>('http://localhost:8080/api/customers/create', {
+          this.http.put<Customer>('http://suzanneblom.nl:8080/api/customers/create', {
             id: this.loggedInUser?.id,
             firstname: customer.firstname,
             lastname: customer.lastname,
@@ -103,7 +103,7 @@ export class UserService {
   authUser(remember?: boolean, toRoute?: boolean, routeTo?: string): Promise<any> {
     const headers = this.api.createRequestHeaders();
     return new Promise<any>(resolve => {
-      this.http.get<User>('http://localhost:8080/api/users/me', {
+      this.http.get<User>('http://suzanneblom.nl:8080/api/users/me', {
         headers
       })
       .subscribe( response  => {
@@ -150,7 +150,7 @@ export class UserService {
     const id = this.getLoggedInUser()?.id;
     const headers = this.api.createRequestHeaders();
     return new Promise<Customer>(resolve => {
-      this.http.get<Customer>('http://localhost:8080/api/customers/' + id, {headers})
+      this.http.get<Customer>('http://suzanneblom.nl:8080/api/customers/' + id, {headers})
       .subscribe(data => {
         this.customer = data;
         this.customerChanged.next(this.customer);
@@ -160,7 +160,7 @@ export class UserService {
   }
   updateCustomerDataOfUser(customer: Customer): void{
     const headers = this.api.createRequestHeaders();
-    this.http.post<Customer>('http://localhost:8080/api/customers/update', customer, {headers})
+    this.http.post<Customer>('http://suzanneblom.nl:8080/api/customers/update', customer, {headers})
     .subscribe(data => {
       this.customer = data;
       this.customerChanged.next(this.customer);
@@ -169,7 +169,7 @@ export class UserService {
   deleteUserAndCustomer(id: number): void {
     this.logout();
     const headers = this.api.createRequestHeaders();
-    this.http.delete<Customer>('http://localhost:8080/api/customers/' + id, {headers});
-    this.http.delete<User>('http://localhost:8080/api/users/' + id, {headers});
+    this.http.delete<Customer>('http://suzanneblom.nl:8080/api/customers/' + id, {headers});
+    this.http.delete<User>('http://suzanneblom.nl:8080/api/users/' + id, {headers});
   }
 }

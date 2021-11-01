@@ -14,6 +14,7 @@ export class ApiService {
 
       headers = headers.set('Content-Type', 'application/json');
       headers = headers.set('Accept', 'application/json');
+      headers = headers.set('Access-Control-Allow-Origin', '*');
 
       if (this.authService.hasAuthorization())
       {
