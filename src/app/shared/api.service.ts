@@ -6,6 +6,9 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class ApiService {
+    url = 'http://localhost:8080/api';
+    // url = 'http://suzanneblom.nl:8080/api';
+
     constructor(private authService: AuthService) {}
 
     public createRequestHeaders(): HttpHeaders

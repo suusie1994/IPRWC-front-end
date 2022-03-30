@@ -30,7 +30,7 @@ export class OrdersService {
     this.orders = [];
     this.orderDetails = [];
     return new Promise<any>(resolve => {
-      this.http.get<Order[]>('http://suzanneblom.nl:8080/api/orders/customer/' + id, {headers})
+      this.http.get<Order[]>(this.apiService.url + '/orders/customer/' + id, {headers})
       .subscribe(async data => {
         for (const order of data){
           this.orders.push(order);
@@ -48,7 +48,7 @@ export class OrdersService {
       return this.orderDetails;
     }
     return new Promise<any>(resolve => {
-      this.http.get<OrderItem[]>('http://suzanneblom.nl:8080/api/orderDetail/', { headers })
+      this.http.get<OrderItem[]>(this.apiService.url + '/orderDetail/', { headers })
       .subscribe( data => {
         this.orderDetails = data;
         resolve(this.orderDetails.slice());
@@ -86,7 +86,7 @@ export class OrdersService {
   private httpCreateOrder(newOrder: OrderToDatabase): Promise<any> {
     const headers = this.apiService.createRequestHeaders();
     return new Promise<any>(resolve => {
-      this.http.put<Order>('http://suzanneblom.nl:8080/api/orders/create', newOrder, {headers})
+      this.http.put<Order>(this.apiService.url + '/orders/create', newOrder, {headers})
       .subscribe(data => {
         resolve(data);
       });
@@ -95,7 +95,7 @@ export class OrdersService {
   private httpCreateOrderDetail(orderItem: OrderItem): Promise<any>{
     const headers = this.apiService.createRequestHeaders();
     return new Promise<any>(resolve => {
-      this.http.put<OrderItem>('http://suzanneblom.nl:8080/api/orderDetail/create', orderItem, {headers})
+      this.http.put<OrderItem>(this.apiService.url + '/orderDetail/create', orderItem, {headers})
       .subscribe(() => {
         resolve(orderItem);
       });
@@ -104,7 +104,7 @@ export class OrdersService {
   getOrderAndDetailsByOrderId(orderId: number): Promise<Order> {
     const headers = this.apiService.createRequestHeaders();
     return new Promise<Order>(resolve => {
-      this.http.get<Order>('http://suzanneblom.nl:8080/api/orders/' + orderId, {headers})
+      this.http.get<Order>(this.apiService.url + '/orders/' + orderId, {headers})
       .subscribe(async (data: Order) => {
         data.orderItems = await this.getOrderDetailsOfOrderId(data.id);
         resolve(data);
@@ -115,7 +115,7 @@ export class OrdersService {
   private async getOrderDetailsOfOrderId(orderId: number): Promise<OrderItem[]> {
     const headers = this.apiService.createRequestHeaders();
     return new Promise<OrderItem[]>(resolve => {
-      this.http.get<OrderItem[]>('http://suzanneblom.nl:8080/api/orderDetail/' + orderId, {headers})
+      this.http.get<OrderItem[]>(this.apiService.url + '/orderDetail/' + orderId, {headers})
       .subscribe(data => {
         resolve(data);
       });
@@ -125,7 +125,7 @@ export class OrdersService {
   updateOrder(orderToUpdate: OrderToDatabase): Promise<Order> {
     const headers = this.apiService.createRequestHeaders();
     return new Promise<any>(resolve => {
-      this.http.put<Order>('http://suzanneblom.nl:8080/api/orders/update', orderToUpdate, {headers})
+      this.http.put<Order>(this.apiService.url + '/orders/update', orderToUpdate, {headers})
       .subscribe(data => {
         resolve(data);
       });
@@ -134,7 +134,7 @@ export class OrdersService {
   removerOrder(orderId: number): Promise<void> {
     const headers = this.apiService.createRequestHeaders();
     return new Promise<any>(resolve => {
-      this.http.delete<Order>('http://suzanneblom.nl:8080/api/orders/' + orderId, {headers})
+      this.http.delete<Order>(this.apiService.url + '/orders/' + orderId, {headers})
       .subscribe(data => {
         resolve(data);
       });
