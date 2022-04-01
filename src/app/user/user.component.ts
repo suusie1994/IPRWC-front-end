@@ -14,9 +14,11 @@ import { UserService } from './user.service';
 export class UserComponent implements OnInit {
   customer: Customer = {};
   showUserInfo = true;
+  showAdmin = false;
   isDataAvailable = false;
   orders: Order[] = [];
   orderDetails: OrderItem[] = [];
+  roles: string[] = [];
 
   constructor(private userService: UserService,
               private orderService: OrdersService) { }
@@ -34,6 +36,7 @@ export class UserComponent implements OnInit {
       this.orderDetails = orderdetails;
       this.isDataAvailable = true;
     });
+    this.roles = this.userService.getRoles();
   }
 
   updateCustomer(customer: Customer): void{

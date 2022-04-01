@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/products', pathMatch: 'full' },
@@ -8,6 +9,7 @@ const routes: Routes = [
   { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
   { path: 'orders', loadChildren: () => import('./order/orders.module').then(m => m.OrdersModule) },
   { path: 'cart', loadChildren: () => import('./cart/cart.module').then(m => m.CartModule) },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path: '**', redirectTo: '/products'} // TODO 404 page maken
 ];
 

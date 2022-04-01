@@ -19,6 +19,9 @@
         <li routerLinkAvtive="active" *ngIf="!isAuthenticated" class="nav-item">
           <a class="nav-link" routerLink="/auth">Login</a>
         </li> 
+        <li routerLinkAvtive="active" *ngIf="isAuthenticated && roles.includes('ADMIN')" class="nav-item">
+          <a class="nav-link" routerLink="/admin">Beheer</a>
+        </li>
         <li routerLinkAvtive="active" *ngIf="isAuthenticated" class="nav-item">
           <a class="nav-link" routerLink="/user">Acount</a>
         </li>

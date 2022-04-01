@@ -39,9 +39,17 @@ export class ProductsService {
 
   updateProduct(product: Product): void {
     const headers = this.apiService.createRequestHeaders();
-    this.http.post<Product>(this.apiService.url + '/products/update', product, { headers })
+    this.http.put<Product>(this.apiService.url + '/products/update', product, { headers })
     .subscribe(data => {
       this.productsChanged.next(this.products.slice());
     });
   }
+
+  createProduct(product: Product): void {
+    const headers = this.apiService.createRequestHeaders();
+    this.http.post<Product>(this.apiService.url + '/products/create', product, { headers })
+    .subscribe(data => {
+      this.productsChanged.next(this.products.slice());
+    });  }
+
 }

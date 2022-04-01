@@ -25,6 +25,12 @@ import { SharedModule } from '../shared/shared.module';
   ],
   providers: [
     ProductsResolversService
+  ],
+  exports: [
+    ProductsComponent,
+    ProductListComponent,
+    ProductDetailComponent,
+    ProductListItemComponent
   ]
 })
 export class ProductsModule { }
