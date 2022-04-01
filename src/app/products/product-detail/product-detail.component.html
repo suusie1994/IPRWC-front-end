@@ -40,7 +40,8 @@
           <input 
             type="number" 
             name="amountToCart" 
-            id="amountToCart" 
+            id="amountToCart"
+            oninput="validity.valid||(value='');"
             class="form-control amount-input" 
             min="1"
             [max]="product.amount"
