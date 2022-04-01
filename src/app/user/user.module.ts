@@ -12,7 +12,8 @@ import { OrdersModule } from '../order/orders.module';
   declarations: [
     UserComponent,
     UserEditComponent,
-    UserDetailComponent,  ],
+    UserDetailComponent,
+  ],
   imports: [
     CommonModule,
     UserRoutingModule,
